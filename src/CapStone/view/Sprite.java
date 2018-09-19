@@ -2,12 +2,12 @@ package CapStone.view;
 
 import CapStone.model.Subject;
 import processing.core.PApplet;
-import java.awt.Image;
+import processing.core.PImage;
 
 public abstract class Sprite {
 	protected PApplet display;
 
-    private Image image;
+    private PImage image;
 	protected int x;
 	protected int y;
 	protected boolean destroyed;
@@ -34,12 +34,12 @@ public abstract class Sprite {
 	    destroyed = true;
     }
 
-    public void setImage(Image image) {
+    public void setImage(PImage image) {
 
         this.image = image;
     }
 
-    public Image getImage() {
+    public PImage getImage() {
 
         return image;
     }
