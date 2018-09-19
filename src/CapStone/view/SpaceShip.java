@@ -6,18 +6,17 @@ import processing.core.PApplet;
 public class SpaceShip extends Sprite {
 
 
-	public SpaceShip(PApplet display, Engine subject) {
-		super(display, subject);
-		update(0);		
+	public SpaceShip(PApplet display, Engine subject, int x, int y, int dx, int dy) {
+		super(display, subject, x, y, 0, 0);
+		update();
 	}
 
-	public void update(Object value) {
+	public void update() {
+		updatePosition();
 		try {
-			int x = (int) value;
-			
 			display.background(204);
 			display.fill(0);
-			display.rect(x, 450, 100, 20);
+			display.rect(getX(), getY(), 100, 20);
 			display.redraw();
 			System.out.println("Gamer Updated");
 		} catch (ClassCastException e) {

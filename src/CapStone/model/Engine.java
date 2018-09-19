@@ -15,18 +15,8 @@ public class Engine implements Subject {
 		return position;
 	}
 	
-	public void updatePosition(int value) {
-		if (value != 100)
-		{
-			if (this.position < 10)
-				this.position = 10;
-			if (this.position > 390)
-				this.position = 390;
-			
-			this.position += value;			
-		}
-		
-		notifyAllSprites();					
+	public void updateData() {
+		notifyAllSprites();
 	}
 	
 	@Override
@@ -39,7 +29,11 @@ public class Engine implements Subject {
 	public void notifyAllSprites() {
 		for (Sprite sprite : sprites) {
 			System.out.println("Sprite notified: " + sprite.toString());
-			sprite.update(position);
+			sprite.update();
 		}
+	}
+
+	public int getPosition() {
+		return position;
 	}
 }

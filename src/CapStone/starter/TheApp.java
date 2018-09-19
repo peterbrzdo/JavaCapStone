@@ -16,7 +16,7 @@ public class TheApp extends PApplet
 
 	@Override
 	public void settings() {
-		size(500, 500);
+	    size(500, 500);
 	}
 
 	@Override
@@ -26,11 +26,12 @@ public class TheApp extends PApplet
 		engine = new Engine();
 		gamerController = new GamerController(engine);
 								
-		spaceship = new SpaceShip(this, engine);		
+		spaceship = new SpaceShip(this, engine, 10, 450, 0, 0);
 	}
 
 	@Override
 	public void draw() {
+		engine.notifyAllSprites();
 	}  // draw() loops forever, until stopped
 	
 	@Override
@@ -40,16 +41,29 @@ public class TheApp extends PApplet
 	@Override
 	public void keyPressed() {
 		if (keyCode == 'A') {
-			gamerController.handleEvent(-10);
+			spaceship.changeSpeedX(-10);
+			gamerController.handleEvent();
+		} else if (keyCode == 'D') {
+			spaceship.changeSpeedX(10);
+			gamerController.handleEvent();
+		} else if (keyCode == 'S') {
+			bullet = new Bullet(this, engine, spaceship.getX(), 450, 0, -5);
+			gamerController.handleEvent();
 		}
-		else if (keyCode == 'D') {			
-		   	gamerController.handleEvent(10);
+
+	}
+
+	@Override
+	public void keyReleased() {
+		if (keyCode == 'A') {
+			spaceship.changeSpeedX(10);
+			gamerController.handleEvent();
 		}
-		else if (keyCode == 'S') {
-			bullet = new Bullet(this, engine);		
-		   	gamerController.handleEvent(100);
-		} 
-		
-	}	    
-		  
+		else if (keyCode == 'D') {
+			spaceship.changeSpeedX(-10);
+			gamerController.handleEvent();
+		}
+
+	}
+
 }

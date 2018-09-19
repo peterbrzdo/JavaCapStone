@@ -10,7 +10,7 @@ public class GamerController {
 		this.engine = engine;
 	}
 	
-	public void handleEvent(int value) {
-		engine.updatePosition(value);
+	public void handleEvent() {
+		engine.updateData();
 	}
 }
