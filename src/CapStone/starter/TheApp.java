@@ -7,10 +7,12 @@ import CapStone.view.Bullet;
 import CapStone.view.Sprite;
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public class TheApp extends PApplet 
 {	
 	private Sprite spaceship;
-	private Sprite bullet;
+	private ArrayList<Sprite> bullets = new ArrayList<>();
 	private GamerController gamerController;
 	private Engine engine;
 
@@ -47,10 +49,10 @@ public class TheApp extends PApplet
 			spaceship.changeSpeedX(10);
 			gamerController.handleEvent();
 		} else if (keyCode == 'S') {
-			bullet = new Bullet(this, engine, spaceship.getX() + 17, 450, 0, -5);
+			Sprite bullet = new Bullet(this, engine, spaceship.getX() + 17, 450, 0, -5);
+			bullets.add(bullet);
 			gamerController.handleEvent();
 		}
-
 	}
 
 	@Override
@@ -63,7 +65,5 @@ public class TheApp extends PApplet
 			spaceship.changeSpeedX(-10);
 			gamerController.handleEvent();
 		}
-
 	}
-
 }
