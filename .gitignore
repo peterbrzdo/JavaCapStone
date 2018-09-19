@@ -1,1 +1,5 @@
 /bin/
+.DS_Store
+.idea/*
+JavaCapStone.iml
+*/.DS_Store
