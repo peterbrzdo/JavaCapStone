@@ -5,17 +5,17 @@ import processing.core.PApplet;
 
 public class Bullet extends Sprite {
 
-	private final String shotImg = "src/images/bullet.png";
-	
 	public Bullet(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
+        this.setImage(display.loadImage("src/images/shot.gif"));
 		update();
 	}
 
 	public void update() {
 		updatePosition();
 		try {
-			display.ellipse(getX(), getY(),5,5);
+			//display.ellipse(getX(), getY(),5,5);
+            display.image(getImage(), getX(), getY());
 			display.redraw();
 			System.out.println("Bullet Updated");
 		}

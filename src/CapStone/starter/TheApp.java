@@ -49,7 +49,7 @@ public class TheApp extends PApplet
 			spaceship.changeSpeedX(10);
 			gamerController.handleEvent();
 		} else if (keyCode == 'S') {
-			Sprite bullet = new Bullet(this, engine, spaceship.getX() + 17, 450, 0, -5);
+			Sprite bullet = new Bullet(this, engine, spaceship.getX() + 10, 440, 0, -5);
 			bullets.add(bullet);
 			gamerController.handleEvent();
 		}
