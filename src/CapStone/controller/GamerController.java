@@ -20,8 +20,20 @@ public class GamerController implements Commons {
 
 	public void run() {
 		engine.notifyAllSprites();
+		this.fleetControl();
 		this.collisionControl();
 	}
+
+	public void fleetControl() {
+        List<Sprite> fleet = engine.getFleet();
+        Sprite invaderCaptain = fleet.get(0);
+        if ((invaderCaptain.getSpeedX() > 0 && invaderCaptain.getX() >= (BOARD_WIDTH - BOARD_PADDING - FLEET_WIDTH))
+        || (invaderCaptain.getSpeedX() < 0 && invaderCaptain.getX() <= (BOARD_PADDING))) {
+            for (Sprite invader : fleet) {
+                invader.reverseSpeedX();
+            }
+        }
+    }
 
 	public void collisionControl() {
 	    // Load sprite lists

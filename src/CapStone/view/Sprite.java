@@ -92,11 +92,27 @@ public abstract class Sprite implements Commons {
         this.dy += value;
     }
 
+    public void reverseSpeedX() {
+        this.dx *= -1;
+    }
+
+    public void reverseSpeedY() {
+        this.dy *= -1;
+    }
+
     public void resetSpeedX() {
         this.dx = 0;
     }
 
     public void resetSpeedY() {
         this.dy = 0;
+    }
+
+    public int getSpeedX() {
+        return this.dx;
+    }
+
+    public int getSpeedY() {
+        return this.dy;
     }
 }

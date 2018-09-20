@@ -30,9 +30,9 @@ public class TheApp extends PApplet implements Commons
 
 		for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-                int x = BOARD_PADDING + (j * 50);
+                int x = BOARD_PADDING + (j * 60);
                 int y = BOARD_PADDING + (i * 40);
-                Sprite invader = new Invader(this, engine, x, y, 0, 0);
+                Sprite invader = new Invader(this, engine, x, y, 2, 0);
                 engine.addInvader(invader);
             }
         }
