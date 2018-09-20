@@ -39,6 +39,7 @@ public class GamerController implements Commons {
         || (invaderCaptain.getSpeedX() < 0 && invaderCaptain.getX() <= (BOARD_PADDING))) {
             for (Sprite invader : fleet) {
                 invader.reverseSpeedX();
+                invader.setY(invader.getY() + INVADE_SPEED);
             }
         }
         int invaderCount = 0;

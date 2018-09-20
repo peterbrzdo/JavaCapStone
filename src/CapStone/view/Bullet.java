@@ -25,4 +25,15 @@ public class Bullet extends Sprite {
         }
 	}
 
+	@Override
+    public void updatePosition() {
+        this.y += this.dy;
+        if (this.y > BOARD_HEIGHT - BOARD_PADDING) {
+            this.y = BOARD_HEIGHT - BOARD_PADDING;
+        }
+        if (this.y < BOARD_PADDING) {
+            this.destroy();
+        }
+    }
+
 }

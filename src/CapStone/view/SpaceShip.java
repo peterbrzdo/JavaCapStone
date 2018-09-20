@@ -25,6 +25,7 @@ public class SpaceShip extends Sprite {
 		}
 	}
 
+	@Override
 	public void updatePosition() {
 		this.x += this.dx;
 		if (this.x > BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH) {
