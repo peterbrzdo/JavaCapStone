@@ -22,20 +22,10 @@ public class TheApp extends PApplet implements Commons
 	public void setup() {  // setup() runs once
 		frameRate(30);
 
-		engine = new Engine();
+		engine = new Engine(this);
 		gamerController = new GamerController( this, engine);
 
 		engine.setGround(new Ground(this, engine, 0, 0, 0, 0));
-		engine.setSpaceship(new SpaceShip(this, engine, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
-
-		for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 6; j++) {
-                int x = BOARD_PADDING + (j * 60);
-                int y = BOARD_PADDING + (i * 40);
-                Sprite invader = new Invader(this, engine, x, y, 2, 0);
-                engine.addInvader(invader);
-            }
-        }
 	}
 
 	@Override
@@ -49,16 +39,17 @@ public class TheApp extends PApplet implements Commons
 	
 	@Override
 	public void keyPressed() {
+	    if (!engine.isGameRunning()) {
+	        engine.startGame();
+            gamerController.handleEvent();
+        }
 		if (keyCode == 'A') {
 			engine.getSpaceship().changeSpeedX(-10);
-			gamerController.handleEvent();
 		} else if (keyCode == 'D') {
             engine.getSpaceship().changeSpeedX(10);
-			gamerController.handleEvent();
 		} else if (keyCode == 'S') {
 			Sprite bullet = new Bullet(this, engine, engine.getSpaceship().getX() + 10, engine.getSpaceship().getY() - 10, 0, -5);
 			engine.addBullet(bullet);
-			gamerController.handleEvent();
 		}
 	}
 
@@ -66,11 +57,9 @@ public class TheApp extends PApplet implements Commons
 	public void keyReleased() {
 		if (keyCode == 'A') {
             engine.getSpaceship().resetSpeedX();
-			gamerController.handleEvent();
 		}
 		else if (keyCode == 'D') {
             engine.getSpaceship().resetSpeedX();
-			gamerController.handleEvent();
 		}
 	}
 }

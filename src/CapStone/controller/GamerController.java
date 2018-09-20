@@ -18,13 +18,18 @@ public class GamerController implements Commons {
 	}
 	
 	public void handleEvent() {
-		engine.updateData();
+		//engine.updateData();
 	}
 
 	public void run() {
-		engine.notifyAllSprites();
-		this.fleetControl();
-		this.collisionControl();
+	    if (!engine.isGameRunning()) {
+            display.text("Press any key to start game", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2));
+        }
+        else {
+            engine.notifyAllSprites();
+            this.fleetControl();
+            this.collisionControl();
+        }
 	}
 
 	public void fleetControl() {
@@ -42,7 +47,12 @@ public class GamerController implements Commons {
                 invaderCount++;
             }
         }
-        display.text("Invaders left: " + invaderCount, BOARD_WIDTH - 200, GROUND + 20);
+        if (invaderCount == 0) {
+            engine.endGame();
+        }
+        else {
+            display.text("Invaders left: " + invaderCount, BOARD_WIDTH - 200, GROUND + 20);
+        }
     }
 
 	public void collisionControl() {
