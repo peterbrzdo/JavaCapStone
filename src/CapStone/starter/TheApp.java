@@ -3,17 +3,15 @@ package CapStone.starter;
 import CapStone.controller.GamerController;
 import CapStone.model.Commons;
 import CapStone.model.Engine;
-import CapStone.view.Invader;
-import CapStone.view.SpaceShip;
-import CapStone.view.Bullet;
-import CapStone.view.Sprite;
+import CapStone.view.*;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
 public class TheApp extends PApplet implements Commons
 {	
-	private Sprite spaceship;
+	private Sprite ground;
+    private Sprite spaceship;
 	private ArrayList<Sprite> bullets = new ArrayList<>();
     private ArrayList<Sprite> bombs = new ArrayList<>();
     private ArrayList<Sprite> fleet = new ArrayList<>();
@@ -31,8 +29,9 @@ public class TheApp extends PApplet implements Commons
 										
 		engine = new Engine();
 		gamerController = new GamerController(engine);
-								
-		spaceship = new SpaceShip(this, engine, BOARD_PADDING, BOARD_HEIGHT - BOARD_PADDING - PLAYER_HEIGHT, 0, 0);
+
+		ground = new Ground(this, engine, 0, 0, 0, 0);
+		spaceship = new SpaceShip(this, engine, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0);
 
 		for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
@@ -62,7 +61,7 @@ public class TheApp extends PApplet implements Commons
 			spaceship.changeSpeedX(10);
 			gamerController.handleEvent();
 		} else if (keyCode == 'S') {
-			Sprite bullet = new Bullet(this, engine, spaceship.getX() + 10, 440, 0, -5);
+			Sprite bullet = new Bullet(this, engine, spaceship.getX() + 10, spaceship.getY() - 10, 0, -5);
 			bullets.add(bullet);
 			gamerController.handleEvent();
 		}
@@ -71,11 +70,11 @@ public class TheApp extends PApplet implements Commons
 	@Override
 	public void keyReleased() {
 		if (keyCode == 'A') {
-			spaceship.changeSpeedX(10);
+			spaceship.resetSpeedX();
 			gamerController.handleEvent();
 		}
 		else if (keyCode == 'D') {
-			spaceship.changeSpeedX(-10);
+			spaceship.resetSpeedX();
 			gamerController.handleEvent();
 		}
 	}

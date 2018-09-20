@@ -17,7 +17,6 @@ public class SpaceShip extends Sprite {
 	public void update() {
 		this.updatePosition();
 		try {
-			display.background(0);
 			display.image(getImage(), getX(), getY());
 			display.redraw();
 			System.out.println("Gamer Updated");

@@ -84,4 +84,12 @@ public abstract class Sprite implements Commons {
     public void changeSpeedY(int value) {
         this.dy += value;
     }
+
+    public void resetSpeedX() {
+        this.dx = 0;
+    }
+
+    public void resetSpeedY() {
+        this.dy = 0;
+    }
 }
