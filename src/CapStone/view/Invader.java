@@ -15,7 +15,6 @@ public class Invader extends Sprite {
 	public void update() {
 		updatePosition();
 		try {
-			display.background(204);
 			display.image(getImage(), getX(), getY());
 			display.redraw();
 			System.out.println("Invader Updated");

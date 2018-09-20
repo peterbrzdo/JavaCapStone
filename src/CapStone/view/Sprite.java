@@ -1,10 +1,11 @@
 package CapStone.view;
 
+import CapStone.model.Commons;
 import CapStone.model.Subject;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public abstract class Sprite {
+public abstract class Sprite implements Commons {
 	protected PApplet display;
 
     private PImage image;
@@ -27,7 +28,19 @@ public abstract class Sprite {
 
 	public void updatePosition() {
 	    this.x += this.dx;
+	    if (this.x > BOARD_WIDTH - BOARD_PADDING) {
+	        this.x = BOARD_WIDTH - BOARD_PADDING;
+        }
+        if (this.x < BOARD_PADDING) {
+            this.x = BOARD_PADDING;
+        }
 	    this.y += this.dy;
+        if (this.y > BOARD_HEIGHT - BOARD_PADDING) {
+            this.y = BOARD_HEIGHT - BOARD_PADDING;
+        }
+        if (this.y < BOARD_PADDING) {
+            this.y = BOARD_PADDING;
+        }
     }
 
 	public void destroy() {

@@ -1,5 +1,6 @@
 package CapStone.view;
 
+import CapStone.model.Commons;
 import CapStone.model.Engine;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -14,14 +15,24 @@ public class SpaceShip extends Sprite {
 	}
 
 	public void update() {
-		updatePosition();
+		this.updatePosition();
 		try {
-			display.background(204);
+			display.background(0);
 			display.image(getImage(), getX(), getY());
 			display.redraw();
 			System.out.println("Gamer Updated");
 		} catch (ClassCastException e) {
 			System.out.println(e.getMessage());
+		}
+	}
+
+	public void updatePosition() {
+		this.x += this.dx;
+		if (this.x > BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH) {
+			this.x = BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH;
+		}
+		if (this.x < BOARD_PADDING) {
+			this.x = BOARD_PADDING;
 		}
 	}
 
