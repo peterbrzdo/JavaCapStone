@@ -3,15 +3,18 @@ package CapStone.controller;
 import CapStone.model.Commons;
 import CapStone.model.Engine;
 import CapStone.view.Sprite;
+import processing.core.PApplet;
 
 import java.util.List;
 
 public class GamerController implements Commons {
 
 	Engine engine;
+    protected PApplet display;
 	
-	public GamerController(Engine engine) {
+	public GamerController(PApplet display, Engine engine) {
 		this.engine = engine;
+		this.display = display;
 	}
 	
 	public void handleEvent() {
@@ -33,6 +36,13 @@ public class GamerController implements Commons {
                 invader.reverseSpeedX();
             }
         }
+        int invaderCount = 0;
+        for (Sprite invader : fleet) {
+            if (!invader.isDestroyed()) {
+                invaderCount++;
+            }
+        }
+        display.text("Invaders left: " + invaderCount, BOARD_WIDTH - 200, GROUND + 20);
     }
 
 	public void collisionControl() {

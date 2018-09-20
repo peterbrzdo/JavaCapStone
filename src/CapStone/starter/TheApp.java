@@ -23,7 +23,7 @@ public class TheApp extends PApplet implements Commons
 		frameRate(30);
 
 		engine = new Engine();
-		gamerController = new GamerController(engine);
+		gamerController = new GamerController( this, engine);
 
 		engine.setGround(new Ground(this, engine, 0, 0, 0, 0));
 		engine.setSpaceship(new SpaceShip(this, engine, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
