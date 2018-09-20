@@ -1,11 +1,12 @@
 package CapStone.controller;
 
+import CapStone.model.Commons;
 import CapStone.model.Engine;
 import CapStone.view.Sprite;
 
 import java.util.List;
 
-public class GamerController {
+public class GamerController implements Commons {
 
 	Engine engine;
 	
@@ -23,6 +24,30 @@ public class GamerController {
 	}
 
 	public void collisionControl() {
-        List<Sprite> sprites = engine.getSprites();
+	    // Load sprite lists
+        List<Sprite> bullets = engine.getBullets();
+        List<Sprite> fleet = engine.getFleet();
+
+        // Check bullets
+        for (Sprite bullet : bullets) {
+            int bX = bullet.getX();
+            int bY = bullet.getY();
+            for (Sprite invader : fleet) {
+                int iX = invader.getX();
+                int iY = invader.getY();
+
+                if (
+                        !invader.isDestroyed()
+                        && !bullet.isDestroyed()
+                        && bX + BULLET_WIDTH >= iX
+                        && bX <= iX + ALIEN_WIDTH
+                        && bY >= iY
+                        && bY <= iY + ALIEN_HEIGHT
+                ) {
+                    invader.destroy();
+                    bullet.destroy();
+                }
+            }
+        }
     }
 }

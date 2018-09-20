@@ -15,12 +15,14 @@ public class Invader extends Sprite {
 
 	public void update() {
 		updatePosition();
-		try {
-			display.image(getImage(), getX(), getY());
-			display.redraw();
-			System.out.println("Invader Updated");
-		} catch (ClassCastException e) {
-			System.out.println(e.getMessage());
+		if (!isDestroyed()) {
+			try {
+				display.image(getImage(), getX(), getY());
+				display.redraw();
+				System.out.println("Invader Updated");
+			} catch (ClassCastException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 

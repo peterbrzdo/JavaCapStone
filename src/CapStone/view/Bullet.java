@@ -13,15 +13,16 @@ public class Bullet extends Sprite {
 
 	public void update() {
 		updatePosition();
-		try {
-			//display.ellipse(getX(), getY(),5,5);
-            display.image(getImage(), getX(), getY());
-			display.redraw();
-			System.out.println("Bullet Updated");
-		}
-		catch (ClassCastException e) {
-			System.out.println(e.getMessage());
-		}
+		if(!isDestroyed()) {
+            try {
+                //display.ellipse(getX(), getY(),5,5);
+                display.image(getImage(), getX(), getY());
+                display.redraw();
+                System.out.println("Bullet Updated");
+            } catch (ClassCastException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 	}
 
 }
