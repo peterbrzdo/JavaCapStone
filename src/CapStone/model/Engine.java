@@ -15,7 +15,7 @@ public class Engine implements Subject, Commons {
 	private Sprite spaceship;
 	private ArrayList<Sprite> bullets = new ArrayList<>();
 	private ArrayList<Sprite> bombs = new ArrayList<>();
-	private ArrayList<Sprite> fleet = new ArrayList<>();
+	private ArrayList<Invader> fleet = new ArrayList<>();
 	private boolean ingame = false;
 
 	public Engine(PApplet display) {
@@ -90,15 +90,15 @@ public class Engine implements Subject, Commons {
 		this.bombs.add(bomb);
 	}
 
-	public ArrayList<Sprite> getFleet() {
+	public ArrayList<Invader> getFleet() {
 		return fleet;
 	}
 
-	public void setFleet(ArrayList<Sprite> fleet) {
+	public void setFleet(ArrayList<Invader> fleet) {
 		this.fleet = fleet;
 	}
 
-	public void addInvader(Sprite invader) {
+	public void addInvader(Invader invader) {
 		this.fleet.add(invader);
 	}
 
@@ -112,13 +112,13 @@ public class Engine implements Subject, Commons {
                 for (int j = 0; j < 6; j++) {
                     int x = BOARD_PADDING + (j * 60);
                     int y = BOARD_PADDING + (i * 40);
-                    Sprite invader = new Invader(display, this, x, y, 2, 0);
+                    Invader invader = new Invader(display, this, x, y, 2, 0);
                     addInvader(invader);
                 }
             }
         }
         else {
-            for (Sprite invader : getFleet()) {
+            for (Invader invader : getFleet()) {
                 invader.resurrect();
             }
         }

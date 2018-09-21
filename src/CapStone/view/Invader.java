@@ -10,6 +10,7 @@ public class Invader extends Sprite {
 	public Invader(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
 		this.setImage(display.loadImage("src/images/alien.gif"));
+		this.bomb = new Bomb(display, subject, 0, 0, 0, 3);
 		update();
 	}
 

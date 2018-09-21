@@ -9,6 +9,10 @@ public interface Commons {
     public static final int ALIEN_HEIGHT = 29;
     public static final int ALIEN_WIDTH = 43;
     public static final int INVADE_SPEED = 15;
+    public static final int BOMB_CHANCE = 99;
+    public static final int BOMB_COUNT = 6;
+    public static final int BOMB_HEIGHT = 5;
+    public static final int BOMB_WIDTH = 5;
     public static final int PLAYER_WIDTH = 33;
     public static final int PLAYER_HEIGHT = 23;
     public static final int BULLET_HEIGHT = 23;

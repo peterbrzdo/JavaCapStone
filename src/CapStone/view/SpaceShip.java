@@ -17,7 +17,7 @@ public class SpaceShip extends Sprite {
 		try {
 			display.image(getImage(), getX(), getY());
 			display.redraw();
-			System.out.println("Spaceship Updated: Speed "+dx+","+dy+" Position "+x+","+y);
+			//System.out.println("Spaceship Updated: Speed "+dx+","+dy+" Position "+x+","+y);
 		} catch (ClassCastException e) {
 			System.out.println(e.getMessage());
 		}

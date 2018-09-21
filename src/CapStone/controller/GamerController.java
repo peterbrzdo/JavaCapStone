@@ -2,11 +2,15 @@ package CapStone.controller;
 
 import CapStone.model.Commons;
 import CapStone.model.Engine;
+import CapStone.view.Bomb;
+import CapStone.view.Invader;
 import CapStone.view.Sprite;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GamerController implements Commons {
 
@@ -36,20 +40,35 @@ public class GamerController implements Commons {
 	}
 
 	public void fleetControl() {
-        List<Sprite> fleet = engine.getFleet();
+        List<Invader> fleet = engine.getFleet();
         if (!fleet.isEmpty()) {
             Sprite invaderCaptain = fleet.get(0);
             if ((invaderCaptain.getSpeedX() > 0 && invaderCaptain.getX() >= (BOARD_WIDTH - BOARD_PADDING - FLEET_WIDTH))
                     || (invaderCaptain.getSpeedX() < 0 && invaderCaptain.getX() <= (BOARD_PADDING))) {
-                for (Sprite invader : fleet) {
+                for (Invader invader : fleet) {
                     invader.reverseSpeedX();
                     invader.setY(invader.getY() + INVADE_SPEED);
                 }
             }
             int invaderCount = 0;
-            for (Sprite invader : fleet) {
+            int bombCount = 0;
+            for (Invader invader : fleet) {
+                Bomb bomb = invader.getBomb();
+                if (!bomb.isDestroyed()) {
+                    bombCount++;
+                }
+            }
+            Random generator = new Random();
+            for (Invader invader : fleet) {
+                Bomb bomb = invader.getBomb();
                 if (!invader.isDestroyed()) {
                     invaderCount++;
+                    int shot = generator.nextInt(BOMB_CHANCE + 1);
+                    if (!invader.isDestroyed() && bomb.isDestroyed() && bombCount < BOMB_COUNT && shot == BOMB_CHANCE) {
+                        bomb.setX(invader.getX() + (ALIEN_WIDTH / 2));
+                        bomb.setY(invader.getY() + ALIEN_HEIGHT);
+                        bomb.resurrect();
+                    }
                 }
             }
             if (invaderCount == 0) {
@@ -65,14 +84,15 @@ public class GamerController implements Commons {
 	public void collisionControl() {
 	    // Load sprite lists
         List<Sprite> bullets = engine.getBullets();
-        List<Sprite> fleet = engine.getFleet();
+        List<Invader> fleet = engine.getFleet();
+        Sprite spaceship = engine.getSpaceship();
 
         // Check bullets
         if (!bullets.isEmpty() && !fleet.isEmpty()) {
             for (Sprite bullet : bullets) {
                 int bX = bullet.getX();
                 int bY = bullet.getY();
-                for (Sprite invader : fleet) {
+                for (Invader invader : fleet) {
                     int iX = invader.getX();
                     int iY = invader.getY();
 
@@ -90,9 +110,30 @@ public class GamerController implements Commons {
                 }
             }
 
-            for (Sprite invader : fleet) {
+            for (Invader invader : fleet) {
                 if (!invader.isDestroyed() && invader.getY() + ALIEN_HEIGHT >= engine.getSpaceship().getY()) {
                     this.endGame(2);
+                }
+            }
+        }
+
+        // Check bombs
+        if (!fleet.isEmpty()) {
+            int sX = spaceship.getX();
+            int sY = spaceship.getY();
+            for (Invader invader : fleet) {
+                Bomb bomb = invader.getBomb();
+                int bX = bomb.getX();
+                int bY = bomb.getY();
+
+                if (
+                        !bomb.isDestroyed()
+                        && bX + BOMB_WIDTH >= sX
+                        && bX <= sX + PLAYER_WIDTH
+                        && bY + BOMB_HEIGHT >= sY
+                        && bY <= sY + PLAYER_HEIGHT
+                ) {
+                    this.endGame(3);
                 }
             }
         }
@@ -102,6 +143,12 @@ public class GamerController implements Commons {
         engine.endGame();
         engine.getLogo().resurrect();
         engine.getLogo().update();
+        ArrayList<Invader> fleet = engine.getFleet();
+        for (Invader invader : fleet) {
+            Bomb bomb = invader.getBomb();
+            bomb.destroy();
+            invader.destroy();
+        }
 	    if (status == 1) {
 	        // Invaders destroyed.
             display.textAlign(PConstants.CENTER);
@@ -113,6 +160,12 @@ public class GamerController implements Commons {
             display.textAlign(PConstants.CENTER);
             display.textSize(24);
             display.text("Invasion. You lose!", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2));
+        }
+        else if (status == 3) {
+            // Invasion.
+            display.textAlign(PConstants.CENTER);
+            display.textSize(24);
+            display.text("Spaceship destroyed. You lose!", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2));
         }
         display.textSize(18);
         display.text("Press any key to start game", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2 + BOARD_PADDING));
