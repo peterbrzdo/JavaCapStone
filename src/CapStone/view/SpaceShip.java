@@ -1,9 +1,7 @@
 package CapStone.view;
 
-import CapStone.model.Commons;
 import CapStone.model.Engine;
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class SpaceShip extends Sprite {
 

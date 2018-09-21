@@ -11,6 +11,7 @@ public class Engine implements Subject, Commons {
 	protected PApplet display;
 	private static List<Sprite> sprites = new ArrayList<Sprite>();
 	private Sprite ground;
+	private Sprite logo;
 	private Sprite spaceship;
 	private ArrayList<Sprite> bullets = new ArrayList<>();
 	private ArrayList<Sprite> bombs = new ArrayList<>();
@@ -49,6 +50,10 @@ public class Engine implements Subject, Commons {
 
 	public void setGround(Sprite ground) {
 		this.ground = ground;
+	}
+
+	public void setLogo(Sprite logo) {
+		this.logo = logo;
 	}
 
 	public Sprite getSpaceship() {
@@ -97,6 +102,7 @@ public class Engine implements Subject, Commons {
 
 	public void startGame() {
 		ingame = true;
+		logo.destroy();
 		setSpaceship(new SpaceShip(display, this, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
 
 		for (int i = 0; i < 4; i++) {

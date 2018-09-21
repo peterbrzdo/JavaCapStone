@@ -4,6 +4,7 @@ import CapStone.model.Commons;
 import CapStone.model.Engine;
 import CapStone.view.Sprite;
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 import java.util.List;
 
@@ -23,7 +24,9 @@ public class GamerController implements Commons {
 
 	public void run() {
 	    if (!engine.isGameRunning()) {
-            display.text("Press any key to start game", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2));
+	        display.textAlign(PConstants.CENTER);
+	        display.textSize(18);
+            display.text("Press any key to start game", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2 + BOARD_PADDING));
         }
         else {
             engine.notifyAllSprites();
@@ -52,7 +55,9 @@ public class GamerController implements Commons {
             engine.endGame();
         }
         else {
-            display.text("Invaders left: " + invaderCount, BOARD_WIDTH - 200, GROUND + 20);
+            display.textAlign(PConstants.RIGHT);
+            display.textSize(13);
+            display.text("Invaders left: " + invaderCount, BOARD_WIDTH - BOARD_PADDING, GROUND + 20);
         }
     }
 

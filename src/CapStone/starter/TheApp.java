@@ -26,6 +26,7 @@ public class TheApp extends PApplet implements Commons
 		gamerController = new GamerController( this, engine);
 
 		engine.setGround(new Ground(this, engine, 0, 0, 0, 0));
+		engine.setLogo(new Logo(this, engine, 0, 0, 0, 0));
 	}
 
 	@Override
