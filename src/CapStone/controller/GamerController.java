@@ -52,25 +52,40 @@ public class GamerController implements Commons {
             }
             int invaderCount = 0;
             int bombCount = 0;
-            for (Invader invader : fleet) {
-                Bomb bomb = invader.getBomb();
-                if (!bomb.isDestroyed()) {
-                    bombCount++;
+           
+            for (Invader invader : fleet) 
+            {  
+            	Bomb bomb = invader.getBomb();
+                if (!bomb.isDestroyed()) 
+                {
+                	bombCount++;            			               
                 }
             }
+            
             Random generator = new Random();
+           
+            boolean last_row;
             for (Invader invader : fleet) {
-                Bomb bomb = invader.getBomb();
-                if (!invader.isDestroyed()) {
-                    invaderCount++;
+            	last_row = true;     	            	
+            	Bomb bomb = invader.getBomb();
+            	for (Invader invader_under : fleet){
+            		     
+            		if (invader_under.getY() > invader.getY() && invader_under.getX() == invader.getX() && !invader_under.isDestroyed())
+            			last_row = false;}
+            	
+            	if (!invader.isDestroyed()) 
+            	{
+            		invaderCount++;
                     int shot = generator.nextInt(BOMB_CHANCE + 1);
-                    if (!invader.isDestroyed() && bomb.isDestroyed() && bombCount < BOMB_COUNT && shot == BOMB_CHANCE) {
-                        bomb.setX(invader.getX() + (ALIEN_WIDTH / 2));
+                    if (!invader.isDestroyed() && bomb.isDestroyed() && bombCount < BOMB_COUNT && shot == BOMB_CHANCE && last_row == true) 
+                    {
+                    	bomb.setX(invader.getX() + (ALIEN_WIDTH / 2));
                         bomb.setY(invader.getY() + ALIEN_HEIGHT);
                         bomb.resurrect();
                     }
-                }
+                }            		               
             }
+            
             if (invaderCount == 0) {
                 this.endGame(1);
             } else {
@@ -132,7 +147,7 @@ public class GamerController implements Commons {
                         && bX <= sX + PLAYER_WIDTH
                         && bY + BOMB_HEIGHT >= sY
                         && bY <= sY + PLAYER_HEIGHT
-                ) {
+                ) {                	
                     this.endGame(3);
                 }
             }

@@ -7,7 +7,7 @@ public class Bomb extends Sprite {
 
 	public Bomb(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
-        this.setImage(display.loadImage("src/images/shot.gif"));
+        this.setImage(display.loadImage("src/images/bomb.gif"));
         this.destroyed = true;
 		update();
 	}
@@ -16,10 +16,9 @@ public class Bomb extends Sprite {
 	    if (!isDestroyed()) {
             updatePosition();
             try {
-                display.ellipse(this.x, this.y, 5, 5);
-                //display.image(getImage(), getX(), getY());
-                display.redraw();
-                //System.out.println("Bomb Updated");
+                //display.ellipse(this.x, this.y, 7, 15);
+                display.image(getImage(), getX(), getY());
+                display.redraw();                
                 //System.out.println("Bomb Updated: Speed "+dx+","+dy+" Position "+x+","+y);
             } catch (ClassCastException e) {
                 System.out.println(e.getMessage());
@@ -35,6 +34,7 @@ public class Bomb extends Sprite {
         }
         if (this.y < BOARD_PADDING) {
             this.y = BOARD_PADDING;
+            this.destroy();
         }
     }
 

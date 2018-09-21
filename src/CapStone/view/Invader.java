@@ -19,8 +19,7 @@ public class Invader extends Sprite {
 		if (!isDestroyed()) {
 			try {
 				display.image(getImage(), getX(), getY());
-				display.redraw();
-				//System.out.println("Invader Updated.");
+				display.redraw();				
 			} catch (ClassCastException e) {
 				System.out.println(e.getMessage());
 			}
