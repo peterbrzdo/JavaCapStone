@@ -17,7 +17,7 @@ public class Bomb extends Sprite {
 			display.ellipse(getX(), getY(),5,5);
             //display.image(getImage(), getX(), getY());
 			display.redraw();
-			System.out.println("Bomb Updated");
+			//System.out.println("Bomb Updated");
 		}
 		catch (ClassCastException e) {
 			System.out.println(e.getMessage());

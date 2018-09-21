@@ -35,7 +35,7 @@ public class Engine implements Subject, Commons {
 	@Override
 	public void notifyAllSprites() {
 		for (Sprite sprite : sprites) {
-			System.out.println("Sprite notified: " + sprite.toString());
+			//System.out.println("Sprite notified: " + sprite.toString());
 			sprite.update();
 		}
 	}
@@ -55,6 +55,8 @@ public class Engine implements Subject, Commons {
 	public void setLogo(Sprite logo) {
 		this.logo = logo;
 	}
+
+	public Sprite getLogo() { return this.logo; }
 
 	public Sprite getSpaceship() {
 		return spaceship;
@@ -103,20 +105,27 @@ public class Engine implements Subject, Commons {
 	public void startGame() {
 		ingame = true;
 		logo.destroy();
-		setSpaceship(new SpaceShip(display, this, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
+        if (this.spaceship == null) {
+            setSpaceship(new SpaceShip(display, this, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
 
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 6; j++) {
-				int x = BOARD_PADDING + (j * 60);
-				int y = BOARD_PADDING + (i * 40);
-				Sprite invader = new Invader(display, this, x, y, 2, 0);
-				addInvader(invader);
-			}
-		}
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 6; j++) {
+                    int x = BOARD_PADDING + (j * 60);
+                    int y = BOARD_PADDING + (i * 40);
+                    Sprite invader = new Invader(display, this, x, y, 2, 0);
+                    addInvader(invader);
+                }
+            }
+        }
+        else {
+            for (Sprite invader : getFleet()) {
+                invader.resurrect();
+            }
+        }
 	}
 
 	public void endGame() {
-		ingame = false;
+	    ingame = false;
 	}
 
 	public boolean isGameRunning() {

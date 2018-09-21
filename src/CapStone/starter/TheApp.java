@@ -42,25 +42,28 @@ public class TheApp extends PApplet implements Commons
 	public void keyPressed() {
 	    if (!engine.isGameRunning()) {
 	        engine.startGame();
-            gamerController.handleEvent();
+            //gamerController.handleEvent();
         }
-		if (keyCode == 'A') {
-			engine.getSpaceship().changeSpeedX(-10);
-		} else if (keyCode == 'D') {
-            engine.getSpaceship().changeSpeedX(10);
-		} else if (keyCode == 'S') {
-			Sprite bullet = new Bullet(this, engine, engine.getSpaceship().getX() + 10, engine.getSpaceship().getY() - 10, 0, -5);
-			engine.addBullet(bullet);
-		}
+        else {
+            if (keyCode == 'A') {
+                engine.getSpaceship().changeSpeedX(-10);
+            } else if (keyCode == 'D') {
+                engine.getSpaceship().changeSpeedX(10);
+            } else if (keyCode == 'S') {
+                Sprite bullet = new Bullet(this, engine, engine.getSpaceship().getX() + 10, engine.getSpaceship().getY() - 10, 0, -5);
+                engine.addBullet(bullet);
+            }
+        }
 	}
 
 	@Override
 	public void keyReleased() {
-		if (keyCode == 'A') {
-            engine.getSpaceship().resetSpeedX();
-		}
-		else if (keyCode == 'D') {
-            engine.getSpaceship().resetSpeedX();
-		}
+	    if (engine.isGameRunning()) {
+            if (keyCode == 'A') {
+                engine.getSpaceship().resetSpeedX();
+            } else if (keyCode == 'D') {
+                engine.getSpaceship().resetSpeedX();
+            }
+        }
 	}
 }

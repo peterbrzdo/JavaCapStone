@@ -17,7 +17,6 @@ public class Ground extends Sprite {
 			display.stroke(Color.GREEN.getRGB());
 			display.line(0, GROUND, BOARD_WIDTH,GROUND);
             display.redraw();
-			System.out.println("Bomb Updated");
 		}
 		catch (ClassCastException e) {
 			System.out.println(e.getMessage());

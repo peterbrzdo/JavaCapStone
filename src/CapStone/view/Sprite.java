@@ -9,6 +9,8 @@ public abstract class Sprite implements Commons {
 	protected PApplet display;
 
     private PImage image;
+    protected int startX;
+    protected int startY;
 	protected int x;
 	protected int y;
 	protected boolean destroyed;
@@ -22,6 +24,8 @@ public abstract class Sprite implements Commons {
 		this.destroyed = false;
 		this.x = x;
         this.y = y;
+        this.startX = x;
+        this.startY = y;
         this.dx = dx;
         this.dy = dy;
 		subject.attach(this);
@@ -48,6 +52,12 @@ public abstract class Sprite implements Commons {
 
 	public void destroy() {
 	    destroyed = true;
+    }
+
+    public void resurrect() {
+	    destroyed = false;
+	    setX(startX);
+	    setY(startY);
     }
 
     public boolean isDestroyed() {
