@@ -15,11 +15,9 @@ public class Bomb extends Sprite {
 	public void update() {
 	    if (!isDestroyed()) {
             updatePosition();
-            try {
-                //display.ellipse(this.x, this.y, 7, 15);
+            try {                
                 display.image(getImage(), getX(), getY());
                 display.redraw();                
-                //System.out.println("Bomb Updated: Speed "+dx+","+dy+" Position "+x+","+y);
             } catch (ClassCastException e) {
                 System.out.println(e.getMessage());
             }
@@ -29,7 +27,7 @@ public class Bomb extends Sprite {
 	@Override
     public void updatePosition() {
         this.y += this.dy;
-        if (this.y > BOARD_HEIGHT - BOARD_PADDING) {
+        if (this.y > BOMB_GROUND) {
             this.destroy();
         }
         if (this.y < BOARD_PADDING) {

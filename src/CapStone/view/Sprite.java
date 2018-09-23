@@ -1,4 +1,4 @@
-package CapStone.view;
+ package CapStone.view;
 
 import CapStone.model.Commons;
 import CapStone.model.Subject;

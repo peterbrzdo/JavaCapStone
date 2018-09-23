@@ -5,6 +5,7 @@ public interface Commons {
     public static final int BOARD_HEIGHT = 480;
     public static final int BOARD_PADDING = 40;
     public static final int GROUND = 420;
+    public static final int BOMB_GROUND = 390;
     public static final int FLEET_WIDTH = 360;
     public static final int ALIEN_HEIGHT = 29;
     public static final int ALIEN_WIDTH = 43;
@@ -17,4 +18,6 @@ public interface Commons {
     public static final int PLAYER_HEIGHT = 23;
     public static final int BULLET_HEIGHT = 23;
     public static final int BULLET_WIDTH = 12;
+    public static final int BULLET_COUNT = 3;
+    public static final int ALLIENS = 24;
 }

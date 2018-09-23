@@ -91,7 +91,7 @@ public class GamerController implements Commons {
             } else {
                 display.textAlign(PConstants.RIGHT);
                 display.textSize(13);
-                display.text("Invaders left: " + invaderCount, BOARD_WIDTH - BOARD_PADDING, GROUND + 20);
+                display.text("Score: " + (ALLIENS - invaderCount), BOARD_WIDTH - BOARD_PADDING, GROUND + 20);
             }
         }
     }

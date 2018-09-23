@@ -34,8 +34,7 @@ public class Engine implements Subject, Commons {
 	
 	@Override
 	public void notifyAllSprites() {
-		for (Sprite sprite : sprites) {
-			//System.out.println("Sprite notified: " + sprite.toString());
+		for (Sprite sprite : sprites) {			
 			sprite.update();
 		}
 	}
@@ -77,7 +76,16 @@ public class Engine implements Subject, Commons {
 	public void addBullet(Sprite bullet) {
 		this.bullets.add(bullet);
 	}
-
+	
+	public int activeBullets()
+	{
+		int active_bullets = 0;
+		for (Sprite bullet : bullets)
+			if (!bullet.isDestroyed())
+				active_bullets++;
+		return active_bullets;		
+	}
+		
 	public ArrayList<Sprite> getBombs() {
 		return bombs;
 	}
@@ -89,7 +97,7 @@ public class Engine implements Subject, Commons {
 	public void addBomb(Sprite bomb) {
 		this.bombs.add(bomb);
 	}
-
+	
 	public ArrayList<Invader> getFleet() {
 		return fleet;
 	}

@@ -7,18 +7,16 @@ public class Bullet extends Sprite {
 
 	public Bullet(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
-        this.setImage(display.loadImage("src/images/shot.gif"));
+        this.setImage(display.loadImage("src/images/shot.gif"));        
 		update();
 	}
 
 	public void update() {
 		updatePosition();
-		if(!isDestroyed()) {
-            try {
-                //display.ellipse(getX(), getY(),5,5);
+		if(!isDestroyed() ) {
+            try {                
                 display.image(getImage(), getX(), getY());
-                display.redraw();
-                //System.out.println("Bullet Updated");
+                display.redraw();                
             } catch (ClassCastException e) {
                 System.out.println(e.getMessage());
             }
