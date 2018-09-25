@@ -17,6 +17,7 @@ public class Engine implements Subject, Commons {
 	private ArrayList<Sprite> bombs = new ArrayList<>();
 	private ArrayList<Invader> fleet = new ArrayList<>();
 	private boolean ingame = false;
+	private int lives = PLAYER_LIVES;
 
 	public Engine(PApplet display) {
 		this.display = display;
@@ -139,5 +140,15 @@ public class Engine implements Subject, Commons {
 	public boolean isGameRunning() {
 		return ingame;
 	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+
 
 }

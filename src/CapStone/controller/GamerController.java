@@ -8,6 +8,7 @@ import CapStone.view.Sprite;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -92,7 +93,9 @@ public class GamerController implements Commons {
             } else {
                 display.textAlign(PConstants.RIGHT);
                 display.textSize(13);
+                display.fill(Color.BLUE.getRGB());
                 display.text("Score: " + (INVADERS - invaderCount), BOARD_WIDTH - BOARD_PADDING, GROUND + 20);
+                display.fill(Color.WHITE.getRGB());
             }
         }
     }
@@ -148,8 +151,12 @@ public class GamerController implements Commons {
                         && bX <= sX + PLAYER_WIDTH
                         && bY + BOMB_HEIGHT >= sY
                         && bY <= sY + PLAYER_HEIGHT
-                ) {                	
-                    this.endGame(3);
+                ) {
+                    bomb.destroy();
+                    engine.setLives((engine.getLives() - 1));
+                    if (engine.getLives() <= 0) {
+                        this.endGame(3);
+                    }
                 }
             }
         }
@@ -187,6 +194,8 @@ public class GamerController implements Commons {
         engine.getLogo().resurrect();
         engine.getLogo().update();
         display.textSize(18);
+        display.fill(Color.RED.getRGB());
         display.text("Press any key to start game", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2 + BOARD_PADDING));
+        display.fill(Color.WHITE.getRGB());
     }
 }

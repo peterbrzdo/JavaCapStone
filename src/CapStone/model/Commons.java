@@ -17,6 +17,7 @@ public interface Commons {
     public static final int BOMB_WIDTH = 5;
     public static final int PLAYER_WIDTH = 33;
     public static final int PLAYER_HEIGHT = 23;
+    public static final int PLAYER_LIVES = 3;
     public static final int BULLET_HEIGHT = 23;
     public static final int BULLET_WIDTH = 12;
     public static final int BULLET_COUNT = 3;
