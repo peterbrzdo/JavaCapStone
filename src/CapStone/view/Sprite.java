@@ -52,6 +52,8 @@ public abstract class Sprite implements Commons {
 
 	public void destroy() {
 	    destroyed = true;
+	    x = BOARD_WIDTH + 10;
+	    y = BOARD_HEIGHT + 10;
     }
 
     public void resurrect() {

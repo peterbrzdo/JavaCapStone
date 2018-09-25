@@ -157,13 +157,14 @@ public class GamerController implements Commons {
 
     public void endGame(int status) {
         engine.endGame();
-        engine.getLogo().resurrect();
-        engine.getLogo().update();
+        engine.getGround().update();
         ArrayList<Invader> fleet = engine.getFleet();
         for (Invader invader : fleet) {
             Bomb bomb = invader.getBomb();
             bomb.destroy();
+            bomb.update();
             invader.destroy();
+            invader.update();
         }
         if (status == 1) {
 	        // Invaders destroyed.
@@ -183,6 +184,8 @@ public class GamerController implements Commons {
             display.textSize(24);
             display.text("Spaceship destroyed. You lose!", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2));
         }
+        engine.getLogo().resurrect();
+        engine.getLogo().update();
         display.textSize(18);
         display.text("Press any key to start game", (int) (BOARD_WIDTH / 2), (int) (BOARD_HEIGHT / 2 + BOARD_PADDING));
     }
