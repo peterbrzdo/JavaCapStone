@@ -114,6 +114,9 @@ public class GamerController implements Commons {
                 for (Invader invader : fleet) {
                     int iX = invader.getX();
                     int iY = invader.getY();
+                    Bomb bomb = invader.getBomb();
+                    int oX = bomb.getX();
+                    int oY = bomb.getY();
 
                     if (
                             !invader.isDestroyed()
@@ -124,6 +127,16 @@ public class GamerController implements Commons {
                                     && bY <= iY + INVADER_HEIGHT
                     ) {
                         invader.destroy();
+                        bullet.destroy();
+                    }
+                    else if (
+                            !bomb.isDestroyed()
+                            && oX + BOMB_WIDTH >= bX
+                            && oX <= bX + BULLET_WIDTH
+                            && oY + BOMB_HEIGHT >= bY
+                            && oY <= bY + BULLET_HEIGHT
+                    ) {
+                        bomb.destroy();
                         bullet.destroy();
                     }
                 }
@@ -142,15 +155,15 @@ public class GamerController implements Commons {
             int sY = spaceship.getY();
             for (Invader invader : fleet) {
                 Bomb bomb = invader.getBomb();
-                int bX = bomb.getX();
-                int bY = bomb.getY();
+                int oX = bomb.getX();
+                int oY = bomb.getY();
 
                 if (
                         !bomb.isDestroyed()
-                        && bX + BOMB_WIDTH >= sX
-                        && bX <= sX + PLAYER_WIDTH
-                        && bY + BOMB_HEIGHT >= sY
-                        && bY <= sY + PLAYER_HEIGHT
+                        && oX + BOMB_WIDTH >= sX
+                        && oX <= sX + PLAYER_WIDTH
+                        && oY + BOMB_HEIGHT >= sY
+                        && oY <= sY + PLAYER_HEIGHT
                 ) {
                     bomb.destroy();
                     engine.setLives((engine.getLives() - 1));
