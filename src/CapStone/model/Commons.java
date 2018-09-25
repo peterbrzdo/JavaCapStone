@@ -3,8 +3,8 @@ package CapStone.model;
 public interface Commons {
     public static final int BOARD_WIDTH = 640;
     public static final int BOARD_HEIGHT = 480;
-    public static final int BOARD_PADDING = 40;
-    public static final int GROUND = 420;
+    public static final int BOARD_PADDING = 30;
+    public static final int GROUND = 390;
     public static final int BOMB_GROUND = 390;
     public static final int FLEET_WIDTH = 360;
     public static final int INVADERS = 24;

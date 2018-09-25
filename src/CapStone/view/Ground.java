@@ -8,12 +8,15 @@ public class Ground extends Sprite {
 
 	public Ground(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
+		this.setImage(display.loadImage("src/images/back.gif"));
         update();
 	}
 
 	public void update() {
 		try {
-			display.background(0);
+			display.image(getImage(), getX(), getY());
+			//display.redraw();
+			//display.background(0);
 			display.stroke(Color.GREEN.getRGB());
 			display.line(0, GROUND, BOARD_WIDTH,GROUND);
             display.redraw();
