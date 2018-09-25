@@ -11,6 +11,7 @@ import processing.core.PConstants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GamerController implements Commons {
 
@@ -47,7 +48,7 @@ public class GamerController implements Commons {
                     || (invaderCaptain.getSpeedX() < 0 && invaderCaptain.getX() <= (BOARD_PADDING))) {
                 for (Invader invader : fleet) {
                     invader.reverseSpeedX();
-                    invader.setY(invader.getY() + INVADE_SPEED);
+                    invader.setY(invader.getY() + INVASION_SPEED);
                 }
             }
             int invaderCount = 0;
@@ -79,8 +80,8 @@ public class GamerController implements Commons {
                     int shot = generator.nextInt(BOMB_CHANCE + 1);
                     if (!invader.isDestroyed() && bomb.isDestroyed() && bombCount < BOMB_COUNT && shot == BOMB_CHANCE && last_row == true) 
                     {
-                    	bomb.setX(invader.getX() + (ALIEN_WIDTH / 2));
-                        bomb.setY(invader.getY() + ALIEN_HEIGHT);
+                    	bomb.setX(invader.getX() + (INVADER_WIDTH / 2));
+                        bomb.setY(invader.getY() + INVADER_HEIGHT);
                         bomb.resurrect();
                     }
                 }            		               
@@ -91,7 +92,7 @@ public class GamerController implements Commons {
             } else {
                 display.textAlign(PConstants.RIGHT);
                 display.textSize(13);
-                display.text("Score: " + (ALLIENS - invaderCount), BOARD_WIDTH - BOARD_PADDING, GROUND + 20);
+                display.text("Score: " + (INVADERS - invaderCount), BOARD_WIDTH - BOARD_PADDING, GROUND + 20);
             }
         }
     }
@@ -115,9 +116,9 @@ public class GamerController implements Commons {
                             !invader.isDestroyed()
                                     && !bullet.isDestroyed()
                                     && bX + BULLET_WIDTH >= iX
-                                    && bX <= iX + ALIEN_WIDTH
+                                    && bX <= iX + INVADER_WIDTH
                                     && bY >= iY
-                                    && bY <= iY + ALIEN_HEIGHT
+                                    && bY <= iY + INVADER_HEIGHT
                     ) {
                         invader.destroy();
                         bullet.destroy();
@@ -126,7 +127,7 @@ public class GamerController implements Commons {
             }
 
             for (Invader invader : fleet) {
-                if (!invader.isDestroyed() && invader.getY() + ALIEN_HEIGHT >= engine.getSpaceship().getY()) {
+                if (!invader.isDestroyed() && invader.getY() + INVADER_HEIGHT >= engine.getSpaceship().getY()) {
                     this.endGame(2);
                 }
             }
@@ -164,7 +165,7 @@ public class GamerController implements Commons {
             bomb.destroy();
             invader.destroy();
         }
-	    if (status == 1) {
+        if (status == 1) {
 	        // Invaders destroyed.
             display.textAlign(PConstants.CENTER);
             display.textSize(24);
