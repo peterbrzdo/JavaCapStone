@@ -113,6 +113,7 @@ public class Engine implements Subject, Commons {
 
 	public void startGame() {
 		ingame = true;
+		lives = PLAYER_LIVES;
 		logo.destroy();
         if (this.spaceship == null) {
             setSpaceship(new SpaceShip(display, this, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
