@@ -29,7 +29,6 @@ public class Engine implements Subject, Commons {
 	
 	@Override
 	public void attach(Sprite sprite) {
-		//System.out.println("Sprite added: " + sprite.toString());
 		sprites.add(sprite);	
 	}
 	
@@ -56,7 +55,9 @@ public class Engine implements Subject, Commons {
 		this.logo = logo;
 	}
 
-	public Sprite getLogo() { return this.logo; }
+	public Sprite getLogo() {
+	    return this.logo;
+	}
 
 	public Sprite getSpaceship() {
 		return spaceship;
@@ -111,18 +112,21 @@ public class Engine implements Subject, Commons {
 		this.fleet.add(invader);
 	}
 
+    /**
+     * Start the actual gameplay.
+     */
 	public void startGame() {
-		ingame = true;
-		lives = PLAYER_LIVES;
-		logo.destroy();
+		this.ingame = true;
+        this.lives = PLAYER_LIVES;
+        this.logo.destroy();
         if (this.spaceship == null) {
-            setSpaceship(new SpaceShip(display, this, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
+            setSpaceship(new SpaceShip(this.display, this, BOARD_PADDING, GROUND - PLAYER_HEIGHT - 20, 0, 0));
 
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 6; j++) {
                     int x = BOARD_PADDING + (j * 60);
                     int y = BOARD_PADDING + (i * 40);
-                    Invader invader = new Invader(display, this, x, y, 2, 0);
+                    Invader invader = new Invader(this.display, this, x, y, 2, 0);
                     addInvader(invader);
                 }
             }
@@ -135,21 +139,18 @@ public class Engine implements Subject, Commons {
 	}
 
 	public void endGame() {
-	    ingame = false;
+        this.ingame = false;
 	}
 
 	public boolean isGameRunning() {
-		return ingame;
+		return this.ingame;
 	}
 
 	public int getLives() {
-		return lives;
+		return this.lives;
 	}
 
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
-
-
-
 }

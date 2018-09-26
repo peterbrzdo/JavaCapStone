@@ -11,15 +11,15 @@ public class Invader extends Sprite {
 		super(display, subject, x, y, dx, dy);
 		this.setImage(display.loadImage("src/images/alien.gif"));
 		this.bomb = new Bomb(display, subject, 0, 0, 0, 3);
-		update();
+		this.update();
 	}
 
 	public void update() {
-		updatePosition();
-		if (!isDestroyed()) {
+		this.updatePosition();
+		if (!this.isDestroyed()) {
 			try {
-				display.image(getImage(), getX(), getY());
-				display.redraw();				
+				this.getDisplay().image(getImage(), getX(), getY());
+				this.getDisplay().redraw();
 			} catch (ClassCastException e) {
 				System.out.println(e.getMessage());
 			}
@@ -29,5 +29,4 @@ public class Invader extends Sprite {
 	public Bomb getBomb() {
 		return bomb;
 	}
-
 }

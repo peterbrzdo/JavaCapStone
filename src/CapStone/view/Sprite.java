@@ -6,17 +6,18 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public abstract class Sprite implements Commons {
-	protected PApplet display;
+
+    private PApplet display;
 
     private PImage image;
-    protected int startX;
-    protected int startY;
-	protected int x;
-	protected int y;
-	protected boolean destroyed;
-	protected int dx;
-	protected int dy;
-	protected Subject subject;
+    private int startX;
+    private int startY;
+    private int x;
+    private int y;
+    private boolean destroyed;
+    private int dx;
+    private int dy;
+    private Subject subject;
 	
 	public Sprite(PApplet display, Subject subject, int x, int y, int dx, int dy) {
 		this.display = display;
@@ -30,39 +31,24 @@ public abstract class Sprite implements Commons {
         this.dy = dy;
 		subject.attach(this);
 	}
-	
-	public abstract void update();
 
-	public void updatePosition() {
-	    this.x += this.dx;
-	    if (this.x > BOARD_WIDTH - BOARD_PADDING) {
-	        this.x = BOARD_WIDTH - BOARD_PADDING;
-        }
-        if (this.x < BOARD_PADDING) {
-            this.x = BOARD_PADDING;
-        }
-	    this.y += this.dy;
-        if (this.y > BOARD_HEIGHT - BOARD_PADDING) {
-            this.y = BOARD_HEIGHT - BOARD_PADDING;
-        }
-        if (this.y < BOARD_PADDING) {
-            this.y = BOARD_PADDING;
-        }
+    /**
+     * Getter and Setter functions.
+     */
+    public PApplet getDisplay() {
+        return display;
     }
 
-	public void destroy() {
-	    destroyed = true;
-	    y = BOARD_HEIGHT + 10;
+    public void setDisplay(PApplet display) {
+        this.display = display;
     }
 
-    public void resurrect() {
-	    destroyed = false;
-	    setX(startX);
-	    setY(startY);
+    public Subject getSubject() {
+        return subject;
     }
 
-    public boolean isDestroyed() {
-	    return destroyed;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public void setImage(PImage image) {
@@ -95,35 +81,101 @@ public abstract class Sprite implements Commons {
         return x;
     }
 
-    public void changeSpeedX(int value) {
-	    this.dx += value;
-    }
-
-    public void changeSpeedY(int value) {
-        this.dy += value;
-    }
-
-    public void reverseSpeedX() {
-        this.dx *= -1;
-    }
-
-    public void reverseSpeedY() {
-        this.dy *= -1;
-    }
-
-    public void resetSpeedX() {
-        this.dx = 0;
-    }
-
-    public void resetSpeedY() {
-        this.dy = 0;
-    }
-
     public int getSpeedX() {
         return this.dx;
     }
 
     public int getSpeedY() {
         return this.dy;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
+
+    public abstract void update();
+
+    /**
+     * Updates the position of a sprite based on its previous position and applying the speed.
+     */
+	public void updatePosition() {
+	    this.x += this.dx;
+	    if (this.x > BOARD_WIDTH - BOARD_PADDING) {
+	        this.x = BOARD_WIDTH - BOARD_PADDING;
+        }
+        if (this.x < BOARD_PADDING) {
+            this.x = BOARD_PADDING;
+        }
+	    this.y += this.dy;
+        if (this.y > BOARD_HEIGHT - BOARD_PADDING) {
+            this.y = BOARD_HEIGHT - BOARD_PADDING;
+        }
+        if (this.y < BOARD_PADDING) {
+            this.y = BOARD_PADDING;
+        }
+    }
+
+    /**
+     * Destroys a sprite.
+     * The sprite will not render anymore and is moved below the board.
+     */
+    public void destroy() {
+	    this.setDestroyed(true);
+	    this.setY(BOARD_HEIGHT + 10);
+    }
+
+    /**
+     * Resurrects a destroyed sprite and resets its position to initial state.
+     */
+    public void resurrect() {
+        this.setDestroyed(false);
+	    this.setX(startX);
+	    this.setY(startY);
+    }
+
+    public boolean isDestroyed() {
+	    return destroyed;
+    }
+
+    /**
+     * Changes the horizontal movement speed of a sprite.
+     */
+    public void changeSpeedX(int value) {
+	    this.dx += value;
+    }
+
+    /**
+     * Changes the vertical movement speed of a sprite.
+     */
+    public void changeSpeedY(int value) {
+        this.dy += value;
+    }
+
+    /**
+     * Reverses the horizontal movement speed of a sprite.
+     */
+    public void reverseSpeedX() {
+        this.dx *= -1;
+    }
+
+    /**
+     * Reverses the vertical movement speed of a sprite.
+     */
+    public void reverseSpeedY() {
+        this.dy *= -1;
+    }
+
+    /**
+     * Stops the horizontal movement speed of a sprite.
+     */
+    public void resetSpeedX() {
+        this.dx = 0;
+    }
+
+    /**
+     * Stops the vertical movement speed of a sprite.
+     */
+    public void resetSpeedY() {
+        this.dy = 0;
     }
 }

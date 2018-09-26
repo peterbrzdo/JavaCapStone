@@ -1,6 +1,5 @@
 package CapStone.starter;
 
-import CapStone.starter.TheApp;
 import processing.core.PApplet;
 
 public class Main 

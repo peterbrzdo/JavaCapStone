@@ -4,8 +4,7 @@ import CapStone.model.Engine;
 import processing.core.PApplet;
 
 public class SpaceShip extends Sprite {
-
-
+    
 	private Engine engine;
 
 	public SpaceShip(PApplet display, Engine subject, int x, int y, int dx, int dy) {
@@ -18,10 +17,10 @@ public class SpaceShip extends Sprite {
 	public void update() {
 		this.updatePosition();
 		try {
-			display.image(getImage(), getX(), getY());
-			display.redraw();
+            this.getDisplay().image(getImage(), getX(), getY());
+            this.getDisplay().redraw();
 			for (int l = 0; l < engine.getLives(); l++) {
-				display.image(getImage(), BOARD_WIDTH - BOARD_PADDING - ((l + 1) * (20 + PLAYER_WIDTH)), BOARD_HEIGHT - BOARD_PADDING - PLAYER_HEIGHT);
+                this.getDisplay().image(getImage(), BOARD_WIDTH - BOARD_PADDING - ((l + 1) * (20 + PLAYER_WIDTH)), BOARD_HEIGHT - BOARD_PADDING - PLAYER_HEIGHT);
 			}
 		} catch (ClassCastException e) {
 			System.out.println(e.getMessage());
@@ -30,13 +29,12 @@ public class SpaceShip extends Sprite {
 
 	@Override
 	public void updatePosition() {
-		this.x += this.dx;
-		if (this.x > BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH) {
-			this.x = BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH;
+		this.setX(getX() + this.getSpeedX());
+		if (this.getX() > BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH) {
+			this.setX(BOARD_WIDTH - BOARD_PADDING - PLAYER_WIDTH);
 		}
-		if (this.x < BOARD_PADDING) {
-			this.x = BOARD_PADDING;
+		if (this.getX() < BOARD_PADDING) {
+			this.setX(BOARD_PADDING);
 		}
 	}
-
 }

@@ -8,15 +8,15 @@ public class Bullet extends Sprite {
 	public Bullet(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
         this.setImage(display.loadImage("src/images/shot.gif"));        
-		update();
+		this.update();
 	}
 
 	public void update() {
-		updatePosition();
-		if(!isDestroyed() ) {
+		this.updatePosition();
+		if(!this.isDestroyed() ) {
             try {                
-                display.image(getImage(), getX(), getY());
-                display.redraw();                
+                this.getDisplay().image(getImage(), getX(), getY());
+                this.getDisplay().redraw();
             } catch (ClassCastException e) {
                 System.out.println(e.getMessage());
             }
@@ -25,13 +25,12 @@ public class Bullet extends Sprite {
 
 	@Override
     public void updatePosition() {
-        this.y += this.dy;
-        if (this.y > BOARD_HEIGHT - BOARD_PADDING) {
-            this.y = BOARD_HEIGHT - BOARD_PADDING;
+        this.setY(this.getY() + this.getSpeedY());
+        if (this.getY() > BOARD_HEIGHT - BOARD_PADDING) {
+            this.setY(BOARD_HEIGHT - BOARD_PADDING);
         }
-        if (this.y < BOARD_PADDING) {
+        if (this.getY() < BOARD_PADDING) {
             this.destroy();
         }
     }
-
 }

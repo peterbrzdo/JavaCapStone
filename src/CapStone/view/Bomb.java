@@ -8,16 +8,16 @@ public class Bomb extends Sprite {
 	public Bomb(PApplet display, Engine subject, int x, int y, int dx, int dy) {
 		super(display, subject, x, y, dx, dy);
         this.setImage(display.loadImage("src/images/bomb.gif"));
-        this.destroyed = true;
-		update();
+        this.destroy();
+		this.update();
 	}
 
 	public void update() {
-	    if (!isDestroyed()) {
+	    if (!this.isDestroyed()) {
             updatePosition();
             try {                
-                display.image(getImage(), getX(), getY());
-                display.redraw();                
+                this.getDisplay().image(getImage(), getX(), getY());
+                this.getDisplay().redraw();
             } catch (ClassCastException e) {
                 System.out.println(e.getMessage());
             }
@@ -26,19 +26,18 @@ public class Bomb extends Sprite {
 
 	@Override
     public void updatePosition() {
-        this.y += this.dy;
-        if (this.y > BOMB_GROUND) {
+        this.setY(this.getY() + this.getSpeedY());
+        if (this.getY() > BOMB_GROUND) {
             this.destroy();
         }
-        if (this.y < BOARD_PADDING) {
-            this.y = BOARD_PADDING;
+        if (this.getY() < BOARD_PADDING) {
+            this.setY(BOARD_PADDING);
             this.destroy();
         }
     }
 
     @Override
     public void resurrect() {
-        destroyed = false;
+        this.setDestroyed(false);
     }
-
 }
