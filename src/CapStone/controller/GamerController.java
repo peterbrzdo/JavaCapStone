@@ -45,6 +45,7 @@ public class GamerController implements Commons {
         List<Invader> fleet = engine.getFleet();
         if (!fleet.isEmpty()) {
             Sprite invaderCaptain = fleet.get(0);
+            //System.out.println("IC: " + invaderCaptain.getX() + " + " + invaderCaptain.getSpeedX());
             if ((invaderCaptain.getSpeedX() > 0 && invaderCaptain.getX() >= (BOARD_WIDTH - BOARD_PADDING - FLEET_WIDTH))
                     || (invaderCaptain.getSpeedX() < 0 && invaderCaptain.getX() <= (BOARD_PADDING))) {
                 for (Invader invader : fleet) {

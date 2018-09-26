@@ -29,7 +29,7 @@ public class Engine implements Subject, Commons {
 	
 	@Override
 	public void attach(Sprite sprite) {
-		System.out.println("Sprite added: " + sprite.toString());
+		//System.out.println("Sprite added: " + sprite.toString());
 		sprites.add(sprite);	
 	}
 	
